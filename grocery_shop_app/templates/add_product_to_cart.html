@@ -1,0 +1,65 @@
+{%extends "base.html"%}
+
+{%block content %}
+<div class="container">
+    <div class="container" >
+
+        <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #a0a3a5;">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="/user/{{u.u_id}}">{{u.name}}'s Dashboard</a>
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav">
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/user/{{u.u_id}}/profile">Profile</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="/user/{{u.u_id}}/cart">Cart</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="/">Logout</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+        </nav>
+
+        <h2>{{p.name}} - {{p.product_type.name}}</h2>
+        <div>
+        <form action="/user/{{u.u_id}}/{{p.p_id}}" method="POST">
+            <label for="available" class="form-label">Availablity:</label>
+            <input class="form-control" type="text" placeholder="{{p.quantity}}" id="available" disabled>
+            
+            <label for="quantity" class="form-label">Select Quantity(in {{p.unit}})</label>
+            <input type="Integer" class="form-control" placeholder="0 to {{p.quantity}}" id="quantity" name="quantity">
+            
+            <label for="Cost" class="form-label">Price:</label>
+            <input class="form-control" type="text" placeholder="{{p.cost}}" id="Cost" disabled>
+            
+
+            <input class="btn btn-primary" type="submit" value="Add to Cart">
+            
+        </form>
+        </div>
+
+        {%if message=="Empty Input!"%}
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+        
+
+        {%elif message=='Can not order more than the total stock!'%}
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+
+        {%elif message=="cannot book order!"%}
+        <div class="alert alert-primary" role="alert">
+            {{message}}
+        </div>
+        {%endif%}
+
+</div>
+{%endblock%}

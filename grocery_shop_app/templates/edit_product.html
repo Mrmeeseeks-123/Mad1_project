@@ -1,0 +1,79 @@
+{%extends "base.html"%}
+{%block content%}
+
+<div class="container">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary" style="background-color: #a0a3a5;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/admin/dashboard">Manager's Dashboard</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" aria-current="page" href="/admin/summary">Summary</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Logout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+  </nav>  
+  <h2>Edit {{p.name}}</h2>
+
+  <form action="/admin/edit_product/{{p.p_id}}" method="POST">
+    <div class="mb-3">
+        <label for="name" class="form-label">Product name</label>
+        <input type="text" class="form-control" id="name" name="name" placeholder="{{p.name}}">
+      </div>
+      <div>
+        <label for="name" class="form-label">Measuring unit</label>
+      <select name="unit" class="form-select" aria-label="Unit" id="unit">
+        <option selected value="unit">unit</option>
+        <option value="kg">kg</option>
+        <option value="litre">litre</option>
+        <option value="gram">gram</option>
+        <option value="ml">ml</option>
+      </select>
+      </div>
+      <div class="mb-3">
+        <label for="cost" class="form-label">Price per unit</label>
+        <input type="number" class="form-control" id="cost" name="cost" >
+      </div>
+      <div class="mb-3">
+        <label for="quantity" class="form-label">Quantity</label>
+        <input type="number" class="form-control" id="quantity" name="quantity" >
+      </div>
+      <div>
+        <input class="btn btn-primary" type="submit" value="Submit">
+      </div>
+      
+</form>
+
+
+{%if message=="Empty Input!"%}
+<div class="alert alert-primary" role="alert">
+    {{message}}
+</div>
+
+
+{%elif message=="Cost can not be 0!"%}
+<div class="alert alert-primary" role="alert">
+    {{message}}
+</div>
+
+
+{%elif message%}
+<div class="alert alert-primary" role="alert">
+   Product-{{message}}
+</div>
+{%endif%}
+
+
+
+</div>
+
+
+
+{%endblock%}
