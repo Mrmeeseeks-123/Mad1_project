@@ -11,6 +11,8 @@ from application.controllers1 import *
 
 from application.controllers2 import *
 
+from application.controllers3 import *
+
 
 if __name__=="__main__":
 	app.run(debug=True)
